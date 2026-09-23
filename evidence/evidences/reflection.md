@@ -1,7 +1,7 @@
 # Reflection Brief — Harness Engineering Capstone
 
-**Name:** Ajay Kumar Vavilapalli
-**Date:** 2026-09-22
+**Name:** Rohith Kumar Polipireddi
+**Date:** 2026-09-23
 
 **Environment**
 
