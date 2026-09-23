@@ -1,0 +1,1 @@
+{"hypothesis_id":"shift-C","evidence":"3 new defects analyzed since 2026-09-22T04:56:07Z","conclusion":"Shift C 2026-04-30: 3 high + 2 medium defects on capacitor-bank-C-7, all from lot 2026-0430-B (DAR 0.39, ESR ~19 mOhm); 1 low VP-4 vent squeal (repeat). Lot quarantine recommended.","ts":"2026-09-22T12:56:07.514215Z"}
