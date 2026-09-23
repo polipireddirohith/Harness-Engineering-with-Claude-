@@ -31,7 +31,14 @@ InferenceBackend = Literal["sdk", "cli"]
 
 @lru_cache(maxsize=1)
 def get_client() -> anthropic.Anthropic:
-    return anthropic.Anthropic()
+    api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")
+    base_url = os.environ.get("ANTHROPIC_BASE_URL")
+    kwargs: dict[str, str] = {}
+    if api_key:
+        kwargs["api_key"] = api_key
+    if base_url:
+        kwargs["base_url"] = base_url
+    return anthropic.Anthropic(**kwargs)
 
 
 def get_model() -> str:
@@ -43,7 +50,7 @@ def set_model(model: str) -> None:
 
 
 def _backend() -> InferenceBackend:
-    if os.environ.get("ANTHROPIC_API_KEY"):
+    if os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN"):
         return "sdk"
     if shutil.which("claude"):
         return "cli"

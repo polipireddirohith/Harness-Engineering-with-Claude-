@@ -36,7 +36,12 @@ class RecordedClaudeClient:
 class AnthropicClaudeClient:
     """Production client using the Anthropic SDK. Requires ANTHROPIC_API_KEY in env."""
 
-    model: str = "claude-sonnet-4-6"
+    model: str = field(
+        default_factory=lambda: os.environ.get(
+            "ANTHROPIC_MODEL",
+            os.environ.get("CLAUDE_MODEL", "claude-sonnet-4-5-20250929"),
+        )
+    )
     max_tokens: int = 1024
     _client: object | None = field(default=None, init=False, repr=False)
 
@@ -44,10 +49,14 @@ class AnthropicClaudeClient:
         if self._client is None:
             from anthropic import Anthropic
 
-            api_key = os.environ.get("ANTHROPIC_API_KEY")
+            api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")
             if not api_key:
                 raise RuntimeError("ANTHROPIC_API_KEY environment variable is not set")
-            self._client = Anthropic(api_key=api_key)
+            base_url = os.environ.get("ANTHROPIC_BASE_URL")
+            kwargs: dict[str, str] = {"api_key": api_key}
+            if base_url:
+                kwargs["base_url"] = base_url
+            self._client = Anthropic(**kwargs)
         from anthropic import Anthropic
 
         assert isinstance(self._client, Anthropic)

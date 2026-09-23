@@ -17,7 +17,9 @@ class ModelRate:
 _RATES: dict[str, ModelRate] = {
     "claude-haiku-4-5": ModelRate(input_per_mtok=1.0, output_per_mtok=5.0),
     "claude-haiku-4-5-20251001": ModelRate(input_per_mtok=1.0, output_per_mtok=5.0),
+    "claude-sonnet-4-5-20250929": ModelRate(input_per_mtok=3.0, output_per_mtok=15.0),
     "claude-sonnet-4-6": ModelRate(input_per_mtok=3.0, output_per_mtok=15.0),
+    "claude-opus-4-5-20251101": ModelRate(input_per_mtok=15.0, output_per_mtok=75.0),
     "claude-opus-4-7": ModelRate(input_per_mtok=15.0, output_per_mtok=75.0),
 }
 
